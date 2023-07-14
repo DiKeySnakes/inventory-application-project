@@ -1,0 +1,7 @@
+<% if (typeof errors ==='object' && errors) { %>
+<ul class="errorMessage">
+  <%errors.forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>

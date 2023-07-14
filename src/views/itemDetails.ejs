@@ -1,0 +1,30 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="details content">
+      <h2>Item: <%= item.name %></h2>
+      <div class="content">
+        <% if (typeof item ==='object' && item) { %>
+        <p><strong>Description:</strong> <%= item.description %></p>
+        <p><strong>Category:</strong> <%= item.category.name %></p>
+        <p><strong>Price: $</strong> <%= item.price %></p>
+        <p><strong>Number in stock:</strong> <%= item.number_in_stock %></p>
+        <hr />
+        <p><strong>Created:</strong> <%= item.createdAt %></p>
+        <p><strong>Updated:</strong> <%= item.updatedAt %></p>
+        <% } %>
+      </div>
+      <a class="edit" href="/item/<%= item._id %>/update">
+        <img src="/edit_black_24dp.svg" alt="edit icon" />
+      </a>
+      <a class="delete" href="/item/<%= item._id %>/delete">
+        <img src="/delete_black_24dp.svg" alt="delete icon" />
+      </a>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>

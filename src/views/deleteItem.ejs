@@ -1,0 +1,41 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="details content">
+      <h2>Item: <%= item.name %></h2>
+      <div class="content">
+        <% if (typeof item ==='object' && item) { %>
+        <p><strong>Description:</strong> <%= item.description %></p>
+        <p><strong>Category:</strong> <%= item.category.name %></p>
+        <p><strong>Price: $</strong> <%= item.price %></p>
+        <p><strong>Number in stock:</strong> <%= item.number_in_stock %></p>
+        <hr />
+        <p><strong>Created:</strong> <%= item.createdAt %></p>
+        <p><strong>Updated:</strong> <%= item.updatedAt %></p>
+        <% } %>
+      </div>
+
+      <hr />
+      <div class="confirm">
+        <p class="confirm">
+          <strong>Do you really want to delete this Item?</strong>
+        </p>
+
+        <form action="" method="POST">
+          <input
+            type="hidden"
+            name="id"
+            required="true"
+            value="<%=item._id%>" />
+          <button type="submit">Delete</button>
+          <%- include("./partials/errors.ejs") %>
+        </form>
+      </div>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>

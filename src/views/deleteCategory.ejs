@@ -1,0 +1,47 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="details content">
+      <h2>Category: <%= category.name %></h2>
+      <div class="content">
+        <p><strong>Description:</strong> <%= category.description %></p>
+        <p><strong>Created:</strong> <%= category.createdAt %></p>
+        <p><strong>Updated:</strong> <%= category.updatedAt %></p>
+        <hr />
+        <% if (typeof category_items ==='object' && category_items.length > 0) {
+        %>
+        <h3>To delete this category you have to delete existing items first</h3>
+        <h2>Items in this category:</h2>
+        <ul>
+          <% category_items.forEach(item => { %>
+          <a class="single" href="/item/<%= item._id %>">
+            <li><h3><%= item.name %></h3></li>
+          </a>
+          <% }) %>
+        </ul>
+        <% } else { %>
+        <div class="confirm">
+          <p class="confirm">
+            <strong>Do you really want to delete this Category?</strong>
+          </p>
+
+          <form action="" method="POST">
+            <input
+              type="hidden"
+              name="id"
+              required="true"
+              value="<%=category._id%>" />
+            <button type="submit">Delete</button>
+            <%- include("./partials/errors.ejs") %>
+          </form>
+        </div>
+        <% } %>
+      </div>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>

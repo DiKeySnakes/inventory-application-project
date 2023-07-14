@@ -1,0 +1,30 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="create-blog content">
+      <form action="" method="POST">
+        <label for="name">Category name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          value="<%= undefined === category ? '' : category.name  %>" />
+        <label for="description">Category description:</label>
+        <input
+          type="text"
+          id="description"
+          name="description"
+          required
+          value="<%= undefined === category ? '' : category.description  %>" />
+        <button>Submit</button>
+        <%- include("./partials/errors.ejs") %>
+      </form>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="details content">
+      <h2>Category: <%= category.name %></h2>
+      <div class="content">
+        <% if (typeof category_items ==='object' && category_items.length > 0) {
+        %>
+        <ul>
+          <% category_items.forEach(item => { %>
+          <a class="single" href="/item/<%= item._id %>">
+            <li><h3><%= item.name %></h3></li>
+          </a>
+          <% }) %>
+        </ul>
+        <% } else { %>
+        <h3>There are no items in this category</h3>
+        <% } %>
+      </div>
+      <a class="edit" href="/category/<%= category._id %>/update">
+        <img src="/edit_black_24dp.svg" alt="edit icon" />
+      </a>
+      <a class="delete" href="/category/<%= category._id %>/delete">
+        <img src="/delete_black_24dp.svg" alt="delete icon" />
+      </a>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>

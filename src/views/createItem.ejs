@@ -1,0 +1,53 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="create-blog content">
+      <form action="" method="POST">
+        <label for="name">Item name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          value="<%= undefined === item ? '' : item.name  %>" />
+        <label for="description">Item description:</label>
+        <input
+          type="text"
+          id="description"
+          name="description"
+          required
+          value="<%= undefined === item ? '' : item.description  %>" />
+        <label for="category">Item category:</label>
+        <select type="select" id="category" name="category" required>
+          <% if (typeof categories ==='object' && categories) {%>
+          <%categories.forEach(category => { %>
+          <option value="<%= category._id.toString() %>">
+            <%= category.name %>
+          </option>
+          <% }) %> <% } %>
+        </select>
+        <label for="price">Item price:</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          required
+          value="<%= undefined === item ? '' : item.price  %>" />
+        <label for="number_in_stock">Item number_in_stock:</label>
+        <input
+          type="number"
+          id="number_in_stock"
+          name="number_in_stock"
+          required
+          value="<%= undefined === item ? '' : item.number_in_stock  %>" />
+        <button>Submit</button>
+        <%- include("./partials/errors.ejs") %>
+      </form>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>

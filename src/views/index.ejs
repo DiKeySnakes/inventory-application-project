@@ -1,0 +1,23 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="blogs content">
+      <h2>Categories</h2>
+
+      <% if (list_categories.length > 0) { %> <%
+      list_categories.forEach(list_category => { %>
+      <a class="single" href="/category/<%= list_category._id %>">
+        <h3 class="title"><%= list_category.name %></h3>
+        <p class="snippet"><%= list_category.description %></p>
+      </a>
+      <% }) %> <% } else { %>
+      <p>There are no categories to display...</p>
+      <% } %>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>
