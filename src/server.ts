@@ -8,7 +8,19 @@ import itemRoutes from './routes/itemRoutes.js';
 
 dotenv.config();
 
+import compression from 'compression';
+import helmet from 'helmet';
+
 const app: Express = express();
+
+// Set up rate limiter: maximum of twenty requests per minute
+import RateLimit from 'express-rate-limit';
+const limiter = RateLimit({
+  windowMs: 1 * 10 * 1000, // 10 seconds
+  max: 10,
+});
+// Apply rate limiter to all requests
+app.use(limiter);
 
 const PORT = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI;
@@ -27,6 +39,17 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      'script-src': ["'self'", 'code.jquery.com', 'cdn.jsdelivr.net'],
+    },
+  })
+);
+
+app.use(compression()); // Compress all routes
+
 app.use(express.static('public'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
